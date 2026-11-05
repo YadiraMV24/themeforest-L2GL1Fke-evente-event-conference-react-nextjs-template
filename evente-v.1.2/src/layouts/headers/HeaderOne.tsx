@@ -1,79 +1,146 @@
-"use client"
-import Image from 'next/image'
-import Link from 'next/link'
-import NavMenu from './menu/NavMenu'
-import UseSticky from '@/hooks/UseSticky'
-import { useState } from 'react'
-import OffCanvas from './menu/OffCanvas'
-import Sidebar from './menu/Sidebar'
-import Searchbar from './menu/Searchbar'
-import HeaderCart from './menu/HeaderCart'
-import TotalCart from './menu/TotalCart'
 
-import logo_1 from "@/assets/img/logo/logo-white.png"
-import logo_2 from "@/assets/img/logo/logo-black.png"
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import NavMenu from "./menu/NavMenu"
+import UseSticky from "@/hooks/UseSticky"
+import { useState } from "react"
+import OffCanvas from "./menu/OffCanvas"
+import Sidebar from "./menu/Sidebar"
+import Searchbar from "./menu/Searchbar"
+import HeaderCart from "./menu/HeaderCart"
+import TotalCart from "./menu/TotalCart"
 
 const HeaderOne = () => {
 
-   const { sticky } = UseSticky();
-   const [cartOpen, setCartOpen] = useState<boolean>(false);
-   const [sidebar, setSidebar] = useState<boolean>(false);
-   const [offCanvas, setOffCanvas] = useState<boolean>(false);
-   const [isSearch, setIsSearch] = useState<boolean>(false);
+   const { sticky } = UseSticky()
+   const [cartOpen, setCartOpen] = useState<boolean>(false)
+   const [sidebar, setSidebar] = useState<boolean>(false)
+   const [offCanvas, setOffCanvas] = useState<boolean>(false)
+   const [isSearch, setIsSearch] = useState<boolean>(false)
 
    return (
       <header id="header" className="td-header-height">
 
-         <div id="header-sticky" className={`td-header__area z-index-999 td-transparent  header-mobile-spacing ${sticky ? "header-sticky" : ""}`}>
+         <div
+            id="header-sticky"
+            className={`td-header__area z-index-999 td-transparent header-mobile-spacing ${sticky ? "header-sticky" : ""}`}
+         >
             <div className="container-fluid container-1680">
                <div className="row align-items-center">
+
                   <div className="col-xxl-9 col-xl-10 col-lg-10 col-6">
                      <div className="tdmenu__wrap d-flex align-items-center justify-content-between">
+
+                        {/* LOGO FORMACIÓN ACM */}
                         <div className="logo">
-                           <Link className="logo-1 logo-sticky-none" href="/"><Image data-width="150" src={logo_1} alt="Logo" /></Link>
-                           <Link className="logo-2 d-none" href="/"><Image data-width="150" src={logo_2} alt="Logo" /></Link>
+
+                           <Link className="logo-1 logo-sticky-none" href="/">
+                              <Image
+                                 src="/imagenes/logo-acm.png"
+                                 alt="Formación ACM"
+                                 width={150}
+                                 height={150}
+                                 style={{
+                                    width: "auto",
+                                    height: "65px",
+                                    maxWidth: "150px",
+                                    objectFit: "contain"
+                                 }}
+                              />
+                           </Link>
+
+                           <Link className="logo-2 d-none" href="/">
+                              <Image
+                                 src="/imagenes/logo-acm.png"
+                                 alt="Formación ACM"
+                                 width={150}
+                                 height={150}
+                                 style={{
+                                    width: "auto",
+                                    height: "65px",
+                                    maxWidth: "150px",
+                                    objectFit: "contain"
+                                 }}
+                              />
+                           </Link>
+
                         </div>
+
+                        {/* MENÚ PRINCIPAL */}
                         <nav className="tdmenu__nav ml-50 mr-50 d-none d-xl-flex">
                            <div className="tdmenu__navbar-wrap tdmenu__main-menu">
                               <NavMenu />
                            </div>
                         </nav>
+
                      </div>
                   </div>
+
                   <div className="col-xxl-3 col-xl-2 col-lg-2 col-6">
                      <div className="td-menu-right-action d-flex align-items-center justify-content-end">
-                        <button onClick={() => setIsSearch(true)} className="search-button search-open-btn">
+
+                        {/* BUSCADOR */}
+                        <button
+                           onClick={() => setIsSearch(true)}
+                           className="search-button search-open-btn"
+                        >
                            <i className="flaticon-search"></i>
                         </button>
+
+                        {/* CARRITO */}
                         <div className="td-header-cart p-relative ml-5">
-                           <button onClick={() => setCartOpen(true)} className="cart-button cartmini-open-btn">
+                           <button
+                              onClick={() => setCartOpen(true)}
+                              className="cart-button cartmini-open-btn"
+                           >
                               <i className="flaticon-shopping-cart"></i>
-                              <span className="td-header-cart-count"><TotalCart /></span>
+                              <span className="td-header-cart-count">
+                                 <TotalCart />
+                              </span>
                            </button>
                         </div>
+
+                        {/* MENÚ LATERAL */}
                         <div className="td-header-menu-bar lh-1 p-relative ml-15">
-                           <button onClick={() => setOffCanvas(true)} className="tdmenu-offcanvas-open-btn menu-tigger d-none d-xl-block">
+
+                           <button
+                              onClick={() => setOffCanvas(true)}
+                              className="tdmenu-offcanvas-open-btn menu-tigger d-none d-xl-block"
+                           >
                               <span></span>
                               <span></span>
                               <span></span>
                            </button>
-                           <button onClick={() => setSidebar(true)} className="tdmenu-offcanvas-open-btn mobile-nav-toggler d-block d-xl-none">
+
+                           <button
+                              onClick={() => setSidebar(true)}
+                              className="tdmenu-offcanvas-open-btn mobile-nav-toggler d-block d-xl-none"
+                           >
                               <span></span>
                               <span></span>
                               <span></span>
                            </button>
+
                         </div>
+
                      </div>
                   </div>
+
                </div>
             </div>
          </div>
+
+         {/* COMPONENTES ORIGINALES */}
          <OffCanvas offCanvas={offCanvas} setOffCanvas={setOffCanvas} />
          <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
          <Searchbar isSearch={isSearch} setIsSearch={setIsSearch} />
          <HeaderCart cartOpen={cartOpen} setCartOpen={setCartOpen} />
+
       </header>
    )
 }
 
 export default HeaderOne
+
